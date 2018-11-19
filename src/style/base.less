@@ -1,0 +1,47 @@
+*,
+::before,
+::after{
+    margin: 0;
+    padding: 0;
+    
+    -webkit-tap-highlight-color: transparent;/*清除点击默认的高亮效果*/
+
+    -webkit-box-sizing: border-box;/*以你的border开始计算你的宽度*/
+
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+    background-color:#eee;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+a:link,a:visited{
+    text-decoration: none;
+}
+a:hover{
+    color:#de2810;
+    text-decoration:underline;
+
+}
+ul,ol{
+    list-style: none;
+    margin-bottom:0;
+}
+input,textarea{
+    border: none;
+    resize: none;
+    outline: none;/*清除选中效果*/
+
+    -webkit-appearance: none;/*清楚浏览器默认的样式*/
+}
+.w{
+    width:960px;
+    margin:0 auto;
+}
