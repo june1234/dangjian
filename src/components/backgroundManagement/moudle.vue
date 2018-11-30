@@ -1,254 +1,375 @@
 <template>
-	<div class="content">
-		<h4 class="title">板块编辑</h4>
-	  	<el-form :inline="true" :model="formInline" class="demo-form-inline">
-		  <el-form-item label="板块">
-			<el-select v-model="formInline.plate" placeholder="请选择板块">
-		      <el-option
-		       v-for="item in options"
-		  	    :key="item.value"
-		  	    :label="item.label"
-		  	    :value="item.value">
-		  	  </el-option>
-		  	</el-select>
-		  </el-form-item>
-		  <el-form-item label="时间">
-		    <el-date-picker
-		      v-model="formInline.startTime"
-		      type="date"
-		      placeholder="选择开始时间">
-		    </el-date-picker>
-		    <el-date-picker
-		      v-model="formInline.endTime"
-		      type="date"
-		      placeholder="选择结束日期">
-		    </el-date-picker>
-		  </el-form-item>
-		  <el-form-item label="作者">
-		    <el-input v-model="formInline.userName" placeholder="请输入作者"></el-input>
-		  </el-form-item>
-		</el-form>
-		<div class="btn">
-			<el-button type="primary">查询</el-button>
-			<el-button type="primary" @click="dialogFormVisible = true">添加</el-button>
-		</div>
-		<el-table
-		    :data="tableData"
-		    border
-		    style="width: 100%">
-		    <el-table-column
-		      prop="title"
-		      label="文章标题"
-		      min-width="20%">
-		    </el-table-column>
-		    <el-table-column
-		      prop="userName"
-		      label="作者"
-		      min-width="20%">
-		    </el-table-column>
-		    <el-table-column
-		      prop="date"
-		      label="时间"
-		      min-width="20%">
-		    </el-table-column>
-		    <el-table-column
-		      prop="plate"
-		      label="所在板块"
-		      min-width="20%">
-		    </el-table-column>
-		    <el-table-column
-			      fixed="right"
-			      label="操作"
-			      min-width="20%">
-			      <template slot-scope="scope">
-			      	<el-button type="text" size="small" @click="dialogFormVisible = true">修改</el-button>
-			        <el-button  type="text" size="small">删除</el-button>
-			      </template>
-			</el-table-column>
-		</el-table>
-		<el-pagination
-	      @size-change="handleSizeChange"
-	      @current-change="handleCurrentChange"
-	      :current-page="currentPage"
-	      :page-sizes="[100, 200, 300, 400]"
-	      :page-size="100"
-	      layout="total, sizes, prev, pager, next, jumper"
-	      :total="400">
-	    </el-pagination>
-		<el-dialog :visible.sync="dialogFormVisible">
-		  <el-form :model="form">
-		    <el-form-item label="板块" :label-width="formLabelWidth">
-				<el-select v-model="form.region" placeholder="请选择板块">
-			      <el-option
-			       v-for="item in options"
-			  	    :key="item.value"
-			  	    :label="item.label"
-			  	    :value="item.value">
-			  	  </el-option>
-			  	</el-select>
-		    </el-form-item>
-		    <el-form-item label="标题" :label-width="formLabelWidth">
-		      <el-input v-model="form.title" autocomplete="off"></el-input>
-		    </el-form-item>
-		    <el-form-item label="作者" :label-width="formLabelWidth">
-		      <el-input v-model="form.name" autocomplete="off"></el-input>
-		    </el-form-item>
-		    <el-form-item label="时间" :label-width="formLabelWidth">
-				<el-date-picker
-			      v-model="form.data"
-			      type="date"
-			      placeholder="选择日期">
-			    </el-date-picker>
-			</el-form-item>
-		    <el-form-item label="文章上传" :label-width="formLabelWidth">
-			    <el-upload
-				  class="upload-demo"
-				  action="https://jsonplaceholder.typicode.com/posts/"
-				  :on-change="handleChange"
-				  :file-list="fileList3"
-				  accept="pdf">
-					  <el-button size="small" type="primary">点击上传</el-button>
-					  <div slot="tip" class="el-upload__tip">只能上传pdf文件，且不超过500kb</div>
-				</el-upload>
-		    </el-form-item>	
-		  </el-form>
-		  <div slot="footer" class="dialog-footer">
-		    <el-button @click="dialogFormVisible = false">取 消</el-button>
-		    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-		  </div>
-		</el-dialog>
-	</div>
+  <div class="content">
+    <h4 class="title">板块编辑</h4>
+    <el-form
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline"
+    >
+      <el-form-item label="板块">
+        <el-select
+          v-model="formInline.moduleId"
+          placeholder="请选择板块"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="时间">
+        <el-date-picker
+          v-model="formInline.artitleTime"
+          type="date"
+          placeholder="选择开始时间"
+        >
+        </el-date-picker>
+        <el-date-picker
+          v-model="formInline.endTime"
+          type="date"
+          placeholder="选择结束日期"
+        >
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="作者">
+        <el-input
+          v-model="formInline.artitleAuthor"
+          placeholder="请输入作者"
+        ></el-input>
+      </el-form-item>
+    </el-form>
+    <div class="btn">
+      <el-button
+        type="primary"
+        @click="losting()"
+      >查询</el-button>
+      <el-button
+        type="primary"
+        @click="dialogFormVisible = true"
+      >添加</el-button>
+    </div>
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%"
+    >
+      <el-table-column
+        prop="articleTitle"
+        label="文章标题"
+        min-width="20%"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="artitleAuthor"
+        label="作者"
+        min-width="20%"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="artitleTime"
+        label="时间"
+        min-width="20%"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="moduleName"
+        label="所在板块"
+        min-width="20%"
+      >
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="操作"
+        min-width="20%"
+      >
+        <template slot-scope="scope">
+          <el-button
+            type="text"
+            size="small"
+            @click="modify(scope.row)"
+          >修改</el-button>
+          <el-button
+            type="text"
+            size="small"
+            @click="deleted(scope.row)"
+          >删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="formInline.pageNum"
+      :page-sizes="[5,10, 15, 20]"
+      :page-size="formInline.pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+    >
+    </el-pagination>
+    <el-dialog :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item
+          label="板块"
+          :label-width="formLabelWidth"
+        >
+          <el-select
+            v-model="form.moduleId"
+            placeholder="请选择板块"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          label="标题"
+          :label-width="formLabelWidth"
+        >
+          <el-input
+            v-model="form.articleTitle"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="作者"
+          :label-width="formLabelWidth"
+        >
+          <el-input
+            v-model="form.artitleAuthor"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="时间"
+          :label-width="formLabelWidth"
+        >
+          <el-date-picker
+            v-model="form.artitleTime"
+            type="date"
+            placeholder="选择日期"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item
+          label="文章上传"
+          :label-width="formLabelWidth"
+        >
+          <el-upload
+            class="upload-demo"
+            action=""
+            :on-change="handleChange"
+            :file-list="fileList3"
+            :limit="1"
+            show-file-list
+            accept="pdf"
+            :auto-upload="false"
+          >
+            <el-button
+              size="small"
+              type="primary"
+            >点击上传</el-button>
+            <div
+              slot="tip"
+              class="el-upload__tip"
+            >只能上传pdf文件，且不超过2M</div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="Verify()"
+        >确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
-	export default {
-		data(){
-         return {
-           options: [
-               {
-		          value: '选项1',
-		          label: '主席讲话'
-		        }, {
-		          value: '选项2',
-		          label: '专题教育'
-		        }, {
-		          value: '选项3',
-		          label: '学习文件'
-		        }, {
-		          value: '选项4',
-		          label: '政策法规'
-		        }, {
-		          value: '选项5',
-		          label: '辅导资料'
-		        },{
-		          value: '选项6',
-		          label: '互动平台'
-		        }
-		    ],
-	        formInline:{
-				plate:'',
-				startTime:'',
-				endTime:'',
-				userName:''
-	        },
-	        tableData: [
-	            {
-		          title: '牢牢把握宣传思想工作的中心环节',
-		          userName: '王云长',
-		          date: '2018-1-31',
-		          plate:'主席讲话'
-
-		        }, {
-		          title: '加强内容建设 涵养良好网络舆论生态',
-		          userName: '孟威',
-		          date: '2018-1-31',
-				  plate:'学习文件'
-		        }, {
-		          title: '深刻理解加强党对全面依法治国的集中统一领导',
-		          userName: '徐立',
-		          date: '2018-1-31',
-		          plate:'互动平台'
-		        }, {
-		          title: '以坚定的理想信念筑牢精神之基',
-		          userName: '田鹏颖',
-		          date: '2018-1-31',
-		          plate:'专题教育'
-		        }
-		    ],
-		    dialogTableVisible: false,
-	        dialogFormVisible: false,
-	        form: {
-	          name: '',
-	          region: '',
-	          date1: '',
-	          date2: '',
-	          delivery: false,
-	          type: [],
-	          resource: '',
-	          desc: ''
-	        },
-	        formLabelWidth: '120px',
-	        fileList3:[{
-	          name: 'food.jpeg',
-	          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-	        }, {
-	          name: 'food2.jpeg',
-	          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-	        }],
-	        currentPage:1
-         } 
-		},
-		methods: {
-	      handleRemove(file, fileList) {
-	        console.log(file, fileList)
-	      },
-	      handlePreview(file) {
-	        console.log(file)
-	      },
-	      handleChange(file, fileList) {
-	        this.fileList3 = fileList.slice(-3);
-	      },
-	      handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-	    }
-	}
+import { findByPage, add, update, deleteId } from "@/api/background/content";
+import { dateFtt } from "@/api/common";
+export default {
+  data() {
+    return {
+      options: [
+        {
+          value: 1,
+          label: "主席讲话"
+        },
+        {
+          value: 2,
+          label: "专题教育"
+        },
+        {
+          value: 3,
+          label: "学习文件"
+        },
+        {
+          value: 4,
+          label: "政策法规"
+        },
+        {
+          value: 5,
+          label: "辅导资料"
+        },
+        {
+          value: 6,
+          label: "互动平台"
+        }
+      ],
+      formInline: {
+        moduleId: "",
+        artitleTime: "",
+        endTime: "",
+        artitleAuthor: "",
+        pageSize: 5,
+        pageNum: 1
+      },
+      total: 0,
+      tableData: [],
+      dialogFormVisible: false,
+      form: {
+        articleTitle: "",
+        artitleAuthor: "",
+        artitleTime: "",
+        moduleId: 1,
+        pdfUrl:[]
+      },
+      formLabelWidth: "120px",
+      fileList3: []
+    };
+  },
+  created() {
+    this.losting();
+  },
+  methods: {
+    losting() {
+      findByPage(this.formInline).then(res => {
+        this.total = res.data.total;
+        this.tableData = res.data.list;
+        console.log(res)
+        for (const i in this.tableData) {
+          this.tableData[i].artitleTime = dateFtt(
+            this.tableData[i].artitleTime
+          );
+        }
+      });
+    },
+    deleted(row) {
+      deleteId(row.id).then(res => {
+        this.losting();
+      });
+    },
+    add() {
+      console.log(this.form)
+      this.form.artitleTime=dateFtt(this.form.artitleTime)
+      const formData=new FormData()
+      formData.append("articleTitle",this.form.articleTitle)
+      formData.append("artitleAuthor",this.form.artitleAuthor)
+      formData.append("artitleTime",this.form.artitleTime)
+      formData.append("moduleId",this.form.moduleId)
+      formData.append("pdfUrl",this.form.pdfUrl)
+      add(formData).then(res=>{
+        console.log(res)
+        this.losting()
+      })
+    },
+    update() {
+        this.form.artitleTime=dateFtt(this.form.artitleTime)
+        const formData=new FormData()
+        formData.append("id",this.form.id)
+        formData.append("articleTitle",this.form.articleTitle)
+        formData.append("artitleAuthor",this.form.artitleAuthor)
+        formData.append("artitleTime",this.form.artitleTime)
+        formData.append("moduleId",this.form.moduleId)
+        formData.append("pdfUrl",this.form.pdfUrl)
+       update(formData).then(res=>{
+         console.log(res)
+         this.losting()
+         this.form
+        this.form.articleTitle= "",
+        this.form.artitleAuthor= "",
+        this.form.artitleTime="",
+        this.form.moduleId=1,
+        this.form.pdfUrl=[]
+       })
+    },
+    Verify() {
+      this.dialogFormVisible = false;
+      console.log(this.form);
+      if (this.form.id) {
+        this.update();
+      } else {
+        this.add();
+      }
+    },
+    modify(row){
+      this.dialogFormVisible = true
+      this.form=row
+    },
+    handleChange(file, fileList) {
+     const isLt2M = file.size / 1024 / 1024 < 2;
+      this.fileList3=fileList
+      console.log(file)
+      this.form.pdfUrl=file.raw
+      return  !isLt2M;
+    },
+    handleSizeChange(val) {
+      this.formInline.pageSize = val;
+      this.losting();
+    },
+    handleCurrentChange(val) {
+      this.formInline.pageNum = val;
+      this.losting();
+    }
+  }
+};
 </script>
 
 <style scoped lang="less">
-    .content{
-    	background-color:#fff;
-    	padding:20px;
-    	.title{
-	        color:#6c7996;
-	        font-size:30px;
-	        line-height:60px;
-	        padding-left:20px;
-    	}
-    	.el-form{
-    		margin-top:20px;
-    		.el-input,.el-select,.el-date-picker{
-    			width: 200px;
-    		}
-    		.el-form-item{
-    			.el-form-item__label{
-    				font-size:16px;
-    				color:#6c7996;
-    			}
-    		}
-    	}
-    	.btn{
-           margin-bottom:20px;
-           float:right;
-           .el-button{
-           	margin-right:20px;
-           }
-    	}
-    	.el-pagination{
-    		margin:20px;
-    	}
+.content {
+  background-color: #fff;
+  padding: 20px;
+  .title {
+    color: #6c7996;
+    font-size: 30px;
+    line-height: 60px;
+    padding-left: 20px;
+  }
+  .el-form {
+    margin-top: 20px;
+    .el-input,
+    .el-select,
+    .el-date-picker {
+      width: 200px;
     }
+    .el-form-item {
+      .el-form-item__label {
+        font-size: 16px;
+        color: #6c7996;
+      }
+    }
+  }
+  .btn {
+    margin-bottom: 20px;
+    float: right;
+    .el-button {
+      margin-right: 20px;
+    }
+  }
+  .el-pagination {
+    margin: 20px;
+  }
+}
 </style>

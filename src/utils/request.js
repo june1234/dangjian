@@ -13,19 +13,18 @@ import store from '../store'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL:'', // api的base_url 服务器地址
-  //baseURL:'http://192.168.100.22:8080/test', //本地地址
+  baseURL: 'http://192.168.17.250:8080/test', // api的base_url 服务器地址
+  // baseURL:'http://192.168.100.22:8080/test', //本地地址
   timeout: 15000 // 请求超时时间
 })
 
 // request拦截器
 service.interceptors.request.use(config => {
-
   if (config.method === 'post') {
-    //config.data = qs.stringify(config.data)
+    // config.data = qs.stringify(config.data)
     config.data = config.data
     config.headers['Content-Type'] = 'application/json'
-    //config.headers['Content-Type'] = 'application/x-www-form-urlencoded'  
+    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   } else if (config.method === 'get') {
     config.params = {
       ...config.params
@@ -47,7 +46,7 @@ service.interceptors.response.use(
     /**
     * code为非1000是抛错 可结合自己业务进行修改
     */
-     
+
     const res = response.data
     if (res.retcode != '200000') {
       Message({
@@ -69,7 +68,6 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error('error'))
     } else {
-      
       return response.data
     }
   },

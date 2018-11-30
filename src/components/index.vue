@@ -5,9 +5,9 @@
 				 <el-col :span="24">
 				 	<div class="grid-content bg-purple" > 
 				 		<img src="../assets/xi.jpg" alt="" />
-			 			<a href="javascript:;">
-						 	<span>习近平：</span>
-					 		<span>在全国组织工作会议上的讲话</span>
+			 			<a href="javascript:;" @click="detailed(max.moduleName,max.id)">
+						 	<span>{{max.artitleAuthor}}：</span>
+					 		<span>{{max.articleTitle}}</span>
 			 			</a>
 				 	</div>
 				 </el-col>
@@ -15,39 +15,12 @@
 		</div>
 		<div class="part">
 			<el-row :gutter="20">
-			  <el-col :span="6">
+			  <el-col :span="6" v-for="(item,index) in min" :key="index">
 			  	<div class="grid-content bg-purple">
 				 		<img src="../assets/dang2.png" alt=""/>
-			 			<a href="javascript:;">
-					 		<p>牢牢把握宣传思想工作的中心环节</p>
-					 		<span>王云长</span>
-			 			</a>
-			  	</div>
-			  </el-col>
-			  <el-col :span="6">
-			  	<div class="grid-content bg-purple">
-				 		<img src="../assets/dang2.png" alt=""/>
-			 			<a href="javascript:;">
-					 		<p>加强内容建设 涵养良好网络舆论生态</p>
-					 		<span>孟威</span>
-			 			</a>
-			  	</div>
-			  </el-col>
-			  <el-col :span="6">
-			  	<div class="grid-content bg-purple">
-				 		<img src="../assets/dang2.png" alt=""/>
-			 			<a href="javascript:;">
-					 		<p>深刻理解加强党对全面依法治国的集中统一领导</p>
-					 		<span>徐立</span>
-			 			</a>
-			  	</div>
-			  </el-col>
-			  <el-col :span="6">
-			  	<div class="grid-content bg-purple">
-				 		<img src="../assets/dang2.png" alt=""/>
-			 			<a href="javascript:;">
-					 		<p>以坚定的理想信念筑牢精神之基</p>
-					 		<span>田鹏颖</span>
+			 			<a href="javascript:;" @click="detailed(item.moduleName,item.id)">
+					 		<p>{{item.articleTitle}}</p>
+					 		<span>{{item.artitleAuthor}}</span>
 			 			</a>
 			  	</div>
 			  </el-col>
@@ -64,34 +37,10 @@
 			  			</a>
 			  		</p>
 			  		<ul>
-			  			<li>
+			  			<li v-for="(item,index) in content.speech" :key="index" @click="detailed(item.moduleName,item.id)">
 			  				<a href="javascript:;" >
-			  					<span>加强党对全面依法治国的集中统一领导</span>
-			  					<span>徐立</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>以坚定的理想信念筑牢精神之基</span>
-			  					<span>田鹏颖</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>全媒体时代主流意识形态的传播策略</span>
-			  					<span>毕耕</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>新时代改革开放大旗只会更鲜亮</span>
-			  					<span>杨凤城</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>彰显对马克思主义的原创性贡献</span>
-			  					<span>郭广银</span>
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -106,34 +55,10 @@
 			  			</a>
 			  		</p>
 			  		<ul>
-			  			<li>
+			  			<li v-for="(item,index) in content.specialEducation" :key="index" @click="detailed(item.moduleName,item.id)">
 			  				<a href="javascript:;" >
-			  					<span>加强党对全面依法治国的集中统一领导</span>
-			  					<span>徐立</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>以坚定的理想信念筑牢精神之基</span>
-			  					<span>田鹏颖</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>全媒体时代主流意识形态的传播策略</span>
-			  					<span>毕耕</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>新时代改革开放大旗只会更鲜亮</span>
-			  					<span>杨凤城</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>彰显对马克思主义的原创性贡献</span>
-			  					<span>郭广银</span>
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -148,34 +73,10 @@
 			  			</a>
 			  		</p>
 			  		<ul>
-			  			<li>
+			  			<li v-for="(item,index) in content.learningDocuments" :key="index" @click="detailed(item.moduleName,item.id)">
 			  				<a href="javascript:;" >
-			  					<span>加强党对全面依法治国的集中统一领导</span>
-			  					<span>徐立</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>以坚定的理想信念筑牢精神之基</span>
-			  					<span>田鹏颖</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>全媒体时代主流意识形态的传播策略</span>
-			  					<span>毕耕</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>新时代改革开放大旗只会更鲜亮</span>
-			  					<span>杨凤城</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>彰显对马克思主义的原创性贡献</span>
-			  					<span>郭广银</span>
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -194,34 +95,10 @@
 			  			</a>
 			  		</p>
 			  		<ul>
-			  			<li>
+			  			<li v-for="(item,index) in content.policies" :key="index" @click="detailed(item.moduleName,item.id)">
 			  				<a href="javascript:;" >
-			  					<span>加强党对全面依法治国的集中统一领导</span>
-			  					<span>徐立</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>以坚定的理想信念筑牢精神之基</span>
-			  					<span>田鹏颖</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>全媒体时代主流意识形态的传播策略</span>
-			  					<span>毕耕</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>新时代改革开放大旗只会更鲜亮</span>
-			  					<span>杨凤城</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>彰显对马克思主义的原创性贡献</span>
-			  					<span>郭广银</span>
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -236,34 +113,10 @@
 			  			</a>
 			  		</p>
 			  		<ul>
-			  			<li>
+			  			<li v-for="(item,index) in content.counselingMaterials" :key="index" @click="detailed(item.moduleName,item.id)">
 			  				<a href="javascript:;" >
-			  					<span>加强党对全面依法治国的集中统一领导</span>
-			  					<span>徐立</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>以坚定的理想信念筑牢精神之基</span>
-			  					<span>田鹏颖</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>全媒体时代主流意识形态的传播策略</span>
-			  					<span>毕耕</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>新时代改革开放大旗只会更鲜亮</span>
-			  					<span>杨凤城</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>彰显对马克思主义的原创性贡献</span>
-			  					<span>郭广银</span>
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -278,34 +131,10 @@
 				  		</a>
 			  		</p>
 			  		<ul>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>标题标题标题标题标题</span>
-			  					<span>作者</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>标题标题标题标题标题</span>
-			  					<span>作者</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>标题标题标题标题标题</span>
-			  					<span>作者</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>标题标题标题标题标题</span>
-			  					<span>作者</span>
-			  				</a>
-			  			</li>
-			  			<li>
-			  				<a href="javascript:;">
-			  					<span>标题标题标题标题标题</span>
-			  					<span>作者</span>
+			  			<li v-for="(item,index) in content.interactivePlatform" :key="index" @click="detailed(item.moduleName,item.id)">
+			  				<a href="javascript:;" >
+			  					<span>{{item.articleTitle}}</span>
+			  					<span>{{item.artitleAuthor}}</span>
 			  				</a>
 			  			</li>
 			  		</ul>
@@ -317,15 +146,42 @@
 </template>
 
 <script>
+import {find,findMould} from '@/api/qian/index'
 export default {
 	data(){
      return {
-     
+		 max:{},
+		 min:[],
+		 content:{},
+		 Detailed:{
+
+		 }
      } 
+	},
+	created(){
+       this.listing()
 	},
 	methods:{
 		link(val){
             this.$router.push(val)
+		},
+		listing(){
+			find().then(res=>{
+				this.max=res.data.max[0]
+				this.min=res.data.min
+			})
+			findMould().then(res=>{
+				this.content=res.data
+				console.log(this.content)
+			})
+		},
+        detailed(val,id){
+			const moduleName=encodeURI(val)
+			console.log(moduleName)
+			this.$router.push({
+				path:'/PDF',
+				query:{id:id,moduleName:moduleName}
+			})
 		}
 	}
 }
